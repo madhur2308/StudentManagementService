@@ -14,15 +14,15 @@ export class StudentService {
             return {
                 studentId: student.studentId,
                 firstName: student.firstName,
-                lastName: student.lastName,
-                dob: moment(student.dob, "DD-MM-YYYY")
+                familyName: student.familyName,
+                dateOfBirth: moment(student.dateOfBirth, "DD-MM-YYYY")
             }
         })
     }
 
     public async createStudent(incomingStudentReqObject: IncomingStudentRequest) {
-        const {dob} = incomingStudentReqObject;
-        const dobMoment = moment(dob, "YYYY-MM-DD");
+        const {dateOfBirth} = incomingStudentReqObject;
+        const dobMoment = moment(dateOfBirth, "YYYY-MM-DD");
         const age = moment().diff(dobMoment, 'years');
         if (age < 10) {
             throw ErrorCodes.STUDENT_TOO_YOUNG;

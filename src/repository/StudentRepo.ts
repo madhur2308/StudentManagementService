@@ -14,9 +14,9 @@ export class StudentRepo {
 
     public async createStudent(student: IncomingStudentRequest) {
         const studentId = uuidv4();
-        const insertQuery = `INSERT INTO user_mgmt.students ("studentId", "firstName", "lastName", "dob", "createdOn")
+        const insertQuery = `INSERT INTO user_mgmt.students ("studentId", "firstName", "familyName", "dateOfBirth", "createdOn")
                              VALUES ($1, $2, $3, $4, $5)`
-        const args = [studentId, student.firstName, student.lastName, student.dob, new Date()]
+        const args = [studentId, student.firstName, student.familyName, student.dateOfBirth, new Date()]
         return await db.query(insertQuery, args);
     }
 }

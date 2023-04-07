@@ -10,7 +10,10 @@ export class CourseController {
         // todo wrap this in a try catch or maybe use error handler created as a middleware
         //  and also the same for other routes too
         const courses = await this.courseService.getAllCourses();
-        res.send(courses);
+        res.send({
+            "success": true,
+            "data": courses
+        });
     }
 
     public async createCourse(req: Request, res: Response) {
@@ -18,7 +21,10 @@ export class CourseController {
         try {
             await this.courseService.createCourse({courseId, courseName});
             res.status(201);
-            res.send('Course is created successfully');
+            res.send({
+                "success": true,
+                "message": "Course is created successfully"
+            });
         } catch (err) {
             switch (err) {
                 default:

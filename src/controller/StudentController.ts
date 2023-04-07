@@ -10,15 +10,21 @@ export class StudentController {
         // todo wrap this in a try catch or maybe use error handler created as a middleware
         //  and also teh same for other routes too
         const students = await this.studentService.getAllStudents();
-        res.send(students);
+        res.send({
+            "success": true,
+            "data": students
+        });
     }
 
     public async createStudent(req: Request, res: Response) {
-        const {firstName, lastName, dob} = req.body;
+        const {firstName, familyName, dateOfBirth} = req.body;
         try {
-            await this.studentService.createStudent({firstName, lastName, dob});
+            await this.studentService.createStudent({firstName, familyName, dateOfBirth});
             res.status(201);
-            res.send('Student is enrolled successfully');
+            res.send({
+                "success": true,
+                "message": "Student is enrolled successfully"
+            });
         } catch (err) {
             switch (err) {
                 case 'STUDENT_TOO_YOUNG':

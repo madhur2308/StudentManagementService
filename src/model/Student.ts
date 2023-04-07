@@ -6,6 +6,6 @@ export interface Student extends IncomingStudentRequest{
 
 export interface IncomingStudentRequest {
     readonly firstName: string;
-    readonly lastName: string;
-    readonly dob: Date;
+    readonly familyName: string;
+    readonly dateOfBirth: Date;
 }
