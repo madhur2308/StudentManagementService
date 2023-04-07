@@ -10,7 +10,10 @@ export class ScoreController {
         // todo wrap this in a try catch or maybe use error handler created as a middleware
         //  and also the same for other routes too
         const courses = await this.scoreService.getAllScores();
-        res.send(courses);
+        res.send({
+            "success": true,
+            "data": courses
+        });
     }
 
     public async assignStudentScore(req: Request, res: Response) {
@@ -18,7 +21,10 @@ export class ScoreController {
         try {
             await this.scoreService.assignStudentScore(studentId, courseId, score);
             res.status(201);
-            res.send('Score is assigned to the student successfully');
+            res.send({
+                "success": true,
+                "message": "Score is assigned to the student successfully"
+            });
         } catch (err) {
             switch (err) {
                 default:
