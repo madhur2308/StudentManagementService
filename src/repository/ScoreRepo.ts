@@ -1,4 +1,5 @@
 import {db} from "./DbConnect";
+import {Score} from "../model/Score";
 
 export class ScoreRepo {
 
@@ -6,7 +7,7 @@ export class ScoreRepo {
     }
 
     // todo add pagination here
-    public async getAllScores() {
+    public async getAllScores():Promise<Score[]> {
         return await db.query(`SELECT s."firstName", s."familyName", sc.score, c."courseName"
                                FROM user_mgmt."Scores" sc
                                         JOIN user_mgmt."courses" c ON sc."courseId" = c."courseId"

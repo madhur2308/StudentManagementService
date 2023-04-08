@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {ScoreService} from "../service/ScoreService";
+import {Score} from "../model/Score";
 
 export class ScoreController {
     constructor(readonly scoreService: ScoreService = new ScoreService()) {
@@ -9,10 +10,10 @@ export class ScoreController {
         res.status(200);
         // todo wrap this in a try catch or maybe use error handler created as a middleware
         //  and also the same for other routes too
-        const courses = await this.scoreService.getAllScores();
+        const scores: Score[] = await this.scoreService.getAllScores();
         res.send({
             "success": true,
-            "data": courses
+            "data": scores
         });
     }
 
